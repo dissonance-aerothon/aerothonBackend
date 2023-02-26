@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "build": "babel-node ./bin/www"
+    "build": "mkdir public && babel-node ./bin/www"
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",
