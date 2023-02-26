@@ -3,8 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "babel-node ./bin/www",
-    "build": "npm install && npm run start"
+    "start": "babel-node ./bin/www"
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",
