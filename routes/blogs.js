@@ -27,7 +27,12 @@ router.get('/:id', async function (req, res, next) {
 router.post('/', async function (req, res, next) {
   try {
     const insertedId = await Blog.insertMany([req.body]);
-    res.status(201).json({ message: 'Blog added successfully' });
+    res
+      .status(201)
+      .json({
+        insertedId: insertedId && insertedId[0]._id,
+        message: 'Blog added successfully',
+      });
   } catch (error) {
     const message = 'Error: Failed to create blog post';
     res.status(400).json({ message });
