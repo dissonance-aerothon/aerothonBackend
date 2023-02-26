@@ -5,7 +5,6 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 import ConnectToDB from './utils/connectToDb';
 
-var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 import blogRouter from './routes/blogs';
 import cors from 'cors';
@@ -25,8 +24,6 @@ app.use(cors());
 
 const db = new ConnectToDB();
 db.connect();
-
-app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/api/blog', blogRouter);
 
