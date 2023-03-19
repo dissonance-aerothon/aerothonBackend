@@ -6,7 +6,7 @@ var logger = require('morgan');
 import ConnectToDB from './utils/connectToDb';
 
 var usersRouter = require('./routes/users');
-import blogRouter from './routes/blogs';
+import gameRouter from './routes/games';
 import cors from 'cors';
 
 var app = express();
@@ -20,7 +20,7 @@ app.use(cors());
 const db = new ConnectToDB();
 db.connect();
 app.use('/users', usersRouter);
-app.use('/api/blog', blogRouter);
+app.use('/api/game', gameRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

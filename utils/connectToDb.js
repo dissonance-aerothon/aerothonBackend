@@ -3,7 +3,7 @@ import mongoose from 'mongoose';
 class ConnectToDB {
   connect = () => {
     mongoose.connect(
-      'mongodb+srv://amir:amir@cluster0.lvvwx.mongodb.net/?retryWrites=true&w=majority',
+      'mongodb+srv://shubham:shubham@cluster0.ydxquyv.mongodb.net/?retryWrites=true&w=majority',
       {
         useNewUrlParser: true,
         useUnifiedTopology: true,

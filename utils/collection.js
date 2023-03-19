@@ -7,10 +7,13 @@ const userSchema = new mongoose.Schema({
 
 const User = mongoose.model('User', userSchema);
 
-const blogSchema = new mongoose.Schema({
-  data: Object,
+const gameSchema = new mongoose.Schema({
+  name: String,
+  url: String,
+  author: String,
+  publishedDate: Date
 });
 
-const Blog = mongoose.model('Blog', blogSchema);
+const Game = mongoose.model('Game', gameSchema);
 
-export { User, Blog };
+export { User, Game };
