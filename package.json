@@ -1,5 +1,5 @@
 {
-  "name": "myportfoliobackend",
+  "name": "game-crud",
   "version": "0.0.0",
   "private": true,
   "scripts": {
@@ -22,14 +22,5 @@
   },
   "main": "app.js",
   "author": "",
-  "license": "ISC",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/amirkpatna1/portfolio.git"
-  },
-  "bugs": {
-    "url": "https://github.com/amirkpatna1/portfolio/issues"
-  },
-  "homepage": "https://github.com/amirkpatna1/portfolio#readme",
-  "description": ""
+  "license": "ISC"
 }
