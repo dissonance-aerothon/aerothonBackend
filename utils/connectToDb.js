@@ -2,13 +2,10 @@ import mongoose from 'mongoose';
 
 class ConnectToDB {
   connect = () => {
-    mongoose.connect(
-      'mongodb+srv://shubham:shubham@cluster0.ydxquyv.mongodb.net/?retryWrites=true&w=majority',
-      {
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
-      }
-    );
+    mongoose.connect(process.env.DB_URL, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    });
 
     const db = mongoose.connection;
 

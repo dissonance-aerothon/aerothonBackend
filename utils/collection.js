@@ -11,9 +11,15 @@ const gameSchema = new mongoose.Schema({
   name: String,
   url: String,
   author: String,
-  publishedDate: Date
+  publishedDate: Date,
 });
 
 const Game = mongoose.model('Game', gameSchema);
 
-export { User, Game };
+const blogSchema = new mongoose.Schema({
+  data: Object,
+});
+
+const Blog = mongoose.model('Blog', blogSchema);
+
+export { Blog, User, Game };
