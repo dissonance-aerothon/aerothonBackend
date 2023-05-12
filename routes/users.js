@@ -17,8 +17,10 @@ router.post('/', async (req, res) => {
       email: req.body.email,
       password: hashPassword,
       verified: false,
-      roles: req.body.roles || [],
     };
+    if (req.body.roles) {
+      user.roles = [req.body.roles];
+    }
     if (!(user.name && user.email && user.password)) {
       res.status(400).json({ message: 'Fields missing' });
     }
