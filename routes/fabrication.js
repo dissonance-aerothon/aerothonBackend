@@ -1,6 +1,6 @@
 import express from 'express';
 import moment from 'moment-timezone';
-import { Fabrication, User } from '../utils/collection';
+import { Fabrication } from '../utils/collection';
 import { authentication } from './middlewares/authentication';
 import { validateRole } from '../utils/validateRoles';
 import { ObjectId } from 'bson';

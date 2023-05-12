@@ -1,9 +1,10 @@
 import express from 'express';
-const router = express.Router();
 import bcrypt from 'bcrypt';
 import { User } from '../utils/collection';
 import jwt from 'jsonwebtoken';
 /* GET users listing. */
+const router = express.Router();
+
 router.get('/', function (req, res, next) {
   res.status('respond with a resource');
 });
