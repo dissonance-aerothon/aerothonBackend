@@ -18,17 +18,17 @@ router.post('/', async (req, res) => {
       verified: false,
       roles: req.body.roles || [],
     };
+    if (!(user.name && user.email && user.password)) {
+      res.status(400).json({ message: 'Fields missing' });
+    }
     const userWithSameEmail = await User.findOne({ email: user.email });
     if (userWithSameEmail) {
       res.status(403).json({ message: 'User already exist' });
     }
-    console.log(user);
-    console.log(typeof user.roles);
     if (!(user.name && user.email && user.password)) {
       throw Error('Name , email or password does not exist');
     }
     const insertedId = await User.insertMany([user]);
-    console.log(insertedId);
     res.status(201).json({
       insertedId: insertedId && insertedId[0]._id,
       message: 'user added successfully',
@@ -39,9 +39,7 @@ router.post('/', async (req, res) => {
 });
 
 router.post('/login', async (req, res) => {
-  console.log(req.body);
   const userFound = await User.findOne({ email: req.body.email });
-  console.log(userFound);
   if (!userFound) {
     res.status(400).json({ message: 'User Not Found' });
   }
