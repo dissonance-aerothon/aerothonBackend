@@ -50,7 +50,7 @@ router.post('/login', async (req, res) => {
   try {
     const correctPass = bcrypt.compare(req.body.password, userFound.password);
     if (correctPass) {
-      const user = { email: userFound.email };
+      const user = { email: userFound.email, roles: userFound.roles };
       const accessToken = jwt.sign(user, process.env.SECRET_TOKEN);
       res.status(201).json({ message: 'Successfully logged in', accessToken });
     } else {
