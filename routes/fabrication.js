@@ -55,7 +55,7 @@ router.get('/', authentication, async function (req, res) {
   }
 });
 
-router.patch('/:id', async (req, res) => {
+router.patch('/:id', authentication, async (req, res) => {
   try {
     const { id } = req.params;
     const { item, itemId, rawMaterial, quantity, startDate, endDate } =
@@ -75,7 +75,7 @@ router.patch('/:id', async (req, res) => {
   }
 });
 
-router.delete('/:id', async function (req, res, next) {
+router.delete('/:id', authentication, async function (req, res, next) {
   try {
     const { id } = req.params;
     if (validateRole(['ADMIN', 'FABRICATION'])) {
@@ -90,7 +90,7 @@ router.delete('/:id', async function (req, res, next) {
   }
 });
 
-router.post('/', async function (req, res) {
+router.post('/', authentication, async function (req, res) {
   try {
     if (validateRole(['ADMIN', 'FABRICATION'])) {
       let body;

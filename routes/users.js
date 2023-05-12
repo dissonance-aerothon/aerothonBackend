@@ -39,6 +39,9 @@ router.post('/', async (req, res) => {
 });
 
 router.post('/login', async (req, res) => {
+  if (!(req.body.email && req.body.password)) {
+    res.status(400).json({ message: 'missing required fields' });
+  }
   const userFound = await User.findOne({ email: req.body.email });
   if (!userFound) {
     res.status(400).json({ message: 'User Not Found' });

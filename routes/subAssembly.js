@@ -56,7 +56,7 @@ router.get('/', authentication, async function (req, res) {
   }
 });
 
-router.patch('/:id', async (req, res) => {
+router.patch('/:id', authentication, async (req, res) => {
   try {
     const { id } = req.params;
     const { assemblyId, process, itemId, machineId, startDate, endDate } =
@@ -76,7 +76,7 @@ router.patch('/:id', async (req, res) => {
   }
 });
 
-router.delete('/:id', async (req, res) => {
+router.delete('/:id', authentication, async (req, res) => {
   try {
     const { id } = req.params;
     if (validateRole(['ADMIN', 'SUB_ASSEMBLY'])) {
@@ -91,7 +91,7 @@ router.delete('/:id', async (req, res) => {
   }
 });
 
-router.post('/', async function (req, res, next) {
+router.post('/', authentication, async function (req, res, next) {
   try {
     if (validateRole(['ADMIN', 'SUB_ASSEMBLY'])) {
       let body;
