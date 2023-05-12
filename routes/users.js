@@ -50,7 +50,10 @@ router.post('/login', async (req, res) => {
     res.status(400).json({ message: 'User Not Found' });
   }
   try {
-    const correctPass = bcrypt.compare(req.body.password, userFound.password);
+    const correctPass = await bcrypt.compare(
+      req.body.password,
+      userFound.password
+    );
     if (correctPass) {
       const user = { email: userFound.email, roles: userFound.roles };
       const accessToken = jwt.sign(user, process.env.SECRET_TOKEN);
