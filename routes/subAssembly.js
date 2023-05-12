@@ -9,29 +9,31 @@ var router = express.Router();
 /* GET home page. */
 router.get('/', authentication, async function (req, res) {
   const query = req.query;
-  query.startDate = {};
-  query.endDate = {};
   if (query._id) {
     query._id = ObjectId(query._id);
   }
   if (query.startDateMin) {
     const startDateMin = query.startDateMin;
     const toDate = moment.unix(startDateMin);
+    query.startDate = {};
     query.startDate.$gte = toDate;
   }
   if (query.startDateMax) {
     const startDateMax = query.startDateMax;
     const toDate = moment.unix(startDateMax);
+    if (!query.startDate) query.startDate = {};
     query.startDate.$lte = toDate;
   }
   if (query.endDateMin) {
     const endDateMin = query.endDateMin;
     const toDate = moment.unix(endDateMin);
+    query.endDate = {};
     query.endDate.$gte = toDate;
   }
   if (query.endDateMax) {
     const endDateMax = query.endDateMax;
     const toDate = moment.unix(endDateMax);
+    if (!query.endDate) query.endDate = {};
     query.endDate.$lte = toDate;
   }
   if (query.itemIds) {
