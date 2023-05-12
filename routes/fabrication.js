@@ -106,7 +106,7 @@ router.post('/', authentication, async function (req, res) {
       res.status(403).json({ message: 'No access right' });
     }
   } catch (error) {
-    const message = 'Error: Failed to create games';
+    const message = 'Error: Failed to insert item';
     res.status(400).json({ message });
   }
 });
