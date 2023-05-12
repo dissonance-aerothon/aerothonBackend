@@ -18,11 +18,11 @@ router.post('/', async (req, res) => {
       password: hashPassword,
       verified: false,
     };
+    if (!(user.name && user.email && user.password && req.body.roles)) {
+      res.status(400).json({ message: 'Fields missing' });
+    }
     if (req.body.roles) {
       user.roles = [req.body.roles];
-    }
-    if (!(user.name && user.email && user.password)) {
-      res.status(400).json({ message: 'Fields missing' });
     }
     const userWithSameEmail = await User.findOne({ email: user.email });
     if (userWithSameEmail) {
