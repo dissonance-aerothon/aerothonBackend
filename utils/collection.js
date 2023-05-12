@@ -3,23 +3,43 @@ import mongoose from 'mongoose';
 const userSchema = new mongoose.Schema({
   name: String,
   email: String,
+  password: String,
+  verified: Boolean,
+  roles: Array,
 });
 
 const User = mongoose.model('User', userSchema);
 
-const gameSchema = new mongoose.Schema({
-  name: String,
-  url: String,
-  author: String,
-  publishedDate: Date,
+const fabricationSchema = new mongoose.Schema({
+  item: String,
+  itemId: String,
+  rawMaterial: String,
+  quantity: String,
+  startDate: Date,
+  endDate: Date,
 });
 
-const Game = mongoose.model('Game', gameSchema);
+const Fabrication = mongoose.model('Fabrication', fabricationSchema);
 
-const blogSchema = new mongoose.Schema({
-  data: Object,
+const subAssemblySchema = new mongoose.Schema({
+  assemblyId: String,
+  process: String,
+  itemId: String,
+  machineId: String,
+  startDate: Date,
+  endDate: Date,
 });
 
-const Blog = mongoose.model('Blog', blogSchema);
+const SubAssembly = mongoose.model('SubAssembly', subAssemblySchema);
 
-export { Blog, User, Game };
+const assemblySchema = new mongoose.Schema({
+  process: String,
+  processId: String,
+  machineId: String,
+  startDate: Date,
+  endDate: Date,
+});
+
+const Assembly = mongoose.model('Assembly', assemblySchema);
+
+export { User, Fabrication, SubAssembly, Assembly };
