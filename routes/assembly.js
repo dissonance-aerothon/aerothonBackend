@@ -45,7 +45,7 @@ router.get('/', authentication, async function (req, res) {
     query.machineId = { $in: machineIds };
   }
 
-  if (validateRole(['ADMIN', 'ASSEMBLY'])) {
+  if (validateRole(['ADMIN', 'ASSEMBLY'],req.user.email)) {
     try {
       const data = await Assembly.find(query);
       res.status(201).json(data || {});
@@ -62,7 +62,7 @@ router.patch('/:id', authentication, async (req, res) => {
   try {
     const { id } = req.params;
     const { process, processId, machineId, startDate, endDate } = req.body;
-    if (validateRole(['ADMIN', 'ASSEMBLY'])) {
+    if (validateRole(['ADMIN', 'ASSEMBLY'],req.user.email)) {
       const data = await Assembly.updateOne(
         { _id: id },
         { $set: { process, processId, machineId, startDate, endDate } }
@@ -80,7 +80,7 @@ router.patch('/:id', authentication, async (req, res) => {
 router.delete('/:id', authentication, async (req, res) => {
   try {
     const { id } = req.params;
-    if (validateRole(['ADMIN', 'ASSEMBLY'])) {
+    if (validateRole(['ADMIN', 'ASSEMBLY'],req.user.email)) {
       const data = await Assembly.deleteOne({ _id: id });
       res.status(201).json(data || {});
     } else {
@@ -94,7 +94,7 @@ router.delete('/:id', authentication, async (req, res) => {
 
 router.post('/', authentication, async function (req, res, next) {
   try {
-    if (validateRole(['ADMIN', 'ASSEMBLY'])) {
+    if (validateRole(['ADMIN', 'ASSEMBLY'],req.user.email)) {
       let body;
       if (Array.isArray(req.body)) {
         body = req.body;

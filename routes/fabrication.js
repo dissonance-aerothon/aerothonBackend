@@ -42,7 +42,7 @@ router.get('/', authentication, async function (req, res) {
     query.itemId = { $in: itemIds };
   }
 
-  if (validateRole(['ADMIN', 'FABRICATION'])) {
+  if (validateRole(['ADMIN', 'FABRICATION'],req.user.email)) {
     try {
       const data = await Fabrication.find(query);
       res.status(201).json(data || {});
@@ -60,7 +60,7 @@ router.patch('/:id', authentication, async (req, res) => {
     const { id } = req.params;
     const { item, itemId, rawMaterial, quantity, startDate, endDate } =
       req.body;
-    if (validateRole(['ADMIN', 'FABRICATION'])) {
+    if (validateRole(['ADMIN', 'FABRICATION'],req.user.email)) {
       const data = await Fabrication.updateOne(
         { _id: id },
         { $set: { item, itemId, rawMaterial, quantity, startDate, endDate } }
@@ -78,7 +78,7 @@ router.patch('/:id', authentication, async (req, res) => {
 router.delete('/:id', authentication, async function (req, res, next) {
   try {
     const { id } = req.params;
-    if (validateRole(['ADMIN', 'FABRICATION'])) {
+    if (validateRole(['ADMIN', 'FABRICATION'],req.user.email)) {
       const data = await Fabrication.deleteOne({ _id: id });
       res.status(201).json(data || {});
     } else {
@@ -92,7 +92,7 @@ router.delete('/:id', authentication, async function (req, res, next) {
 
 router.post('/', authentication, async function (req, res) {
   try {
-    if (validateRole(['ADMIN', 'FABRICATION'])) {
+    if (validateRole(['ADMIN', 'FABRICATION'],req.user.email)) {
       let body;
       if (Array.isArray(req.body)) {
         body = req.body;
