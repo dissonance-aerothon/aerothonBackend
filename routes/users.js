@@ -20,6 +20,7 @@ router.post('/', async (req, res) => {
     };
     if (!(user.name && user.email && user.password && req.body.roles)) {
       res.status(400).json({ message: 'Fields missing' });
+      return;
     }
     if (req.body.roles) {
       user.roles = [req.body.roles];
@@ -27,6 +28,7 @@ router.post('/', async (req, res) => {
     const userWithSameEmail = await User.findOne({ email: user.email });
     if (userWithSameEmail) {
       res.status(403).json({ message: 'User already exist' });
+      return;
     }
     if (!(user.name && user.email && user.password)) {
       throw Error('Name , email or password does not exist');
@@ -44,10 +46,12 @@ router.post('/', async (req, res) => {
 router.post('/login', async (req, res) => {
   if (!(req.body.email && req.body.password)) {
     res.status(400).json({ message: 'missing required fields' });
+    return;
   }
   const userFound = await User.findOne({ email: req.body.email });
   if (!userFound) {
     res.status(400).json({ message: 'User Not Found' });
+    return;
   }
   try {
     const correctPass = await bcrypt.compare(
