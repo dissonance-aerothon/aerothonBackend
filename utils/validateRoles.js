@@ -1,11 +1,7 @@
-import { User } from './collection';
-
-const validateRole = async (roles, email) => {
-  const userRoles = await User.findOne(
-    { email },
-    { roles: { $in: roles }, _id: 0 }
-  );
-  if (userRoles) return true;
+const validateRole = async (roles, userRoles) => {
+  userRoles.forEach((userRole) => {
+    if (roles.indexOf(userRole) > -1) return true;
+  });
   return false;
 };
 
